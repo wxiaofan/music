@@ -9,10 +9,6 @@
     //
     $.getJSON("js/db.json", function (data) {
         playlist = data;
-        // JSON.parse(playlist);
-
-    console.log(playlist.length);
-
     for (var i = 0; i < playlist.length; i++) {
         var item = playlist[i];
         $('#playlist').append('<li>' + item.artist + ' - ' + item.title + '</li>');
