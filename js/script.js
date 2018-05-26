@@ -4,72 +4,15 @@
         shuffle = localStorage.shuffle || 'false',
         continous = true,
         autoplay = true,
-        playlist = [
-            {
-                "title": "墨痕",
-                "artist": "刘亦坷",
-                "album": '肩上蝶',
-                "cover": "https://visualhunt.com/photos/7/night-night-sky-nightsky.jpg?s=s",
-                "mp3": "http://oq5lv0dy4.bkt.clouddn.com/%E5%88%98%E7%8F%82%E7%9F%A3%20-%20%E5%A2%A8%E7%97%95.mp3",
-                "ogg": "https://visualhunt.com/photos/7/sky-silhouette-star.jpg?s=s"
-            }, {
-                "title": "寻梅",
-                "artist": "刘珂矣",
-                "album": '肩上蝶',
-                "cover": "https://visualhunt.com/photos/7/night-night-sky-nightsky.jpg?s=s",
-                "mp3": "http://oq5lv0dy4.bkt.clouddn.com/%E5%88%98%E7%8F%82%E7%9F%A3%20-%20%E5%AF%BB%E6%A2%85.mp3",
-                "ogg": "https://visualhunt.com/photos/7/sky-silhouette-star.jpg?s=s"
-            }, {
-                "title": "暖山",
-                "artist": "刘珂矣",
-                "album": '肩上蝶',
-                "cover": "https://visualhunt.com/photos/7/night-night-sky-nightsky.jpg?s=s",
-                "mp3": "http://oq5lv0dy4.bkt.clouddn.com/%E5%88%98%E7%8F%82%E7%9F%A3%20-%20%E6%9A%96%E5%B1%B1.mp3",
-                "ogg": "https://visualhunt.com/photos/7/sky-silhouette-star.jpg?s=s"
-            }, {
-                "title": "渡风",
-                "artist": "刘珂矣",
-                "album": '肩上蝶',
-                "cover": "https://visualhunt.com/photos/7/night-night-sky-nightsky.jpg?s=s",
-                "mp3": "http://oq5lv0dy4.bkt.clouddn.com/%E5%88%98%E7%8F%82%E7%9F%A3%20-%20%E6%B8%A1%E9%A3%8E.mp3",
-                "ogg": "https://visualhunt.com/photos/7/sky-silhouette-star.jpg?s=s"
-            }, {
-                "title": "花又开",
-                "artist": "刘珂矣",
-                "album": '肩上蝶',
-                "cover": "https://visualhunt.com/photos/7/night-night-sky-nightsky.jpg?s=s",
-                "mp3": "http://oq5lv0dy4.bkt.clouddn.com/%E5%88%98%E7%8F%82%E7%9F%A3%20-%20%E8%8A%B1%E5%8F%88%E5%BC%80.mp3",
-                "ogg": "https://visualhunt.com/photos/7/sky-silhouette-star.jpg?s=s"
-            }, {
-                "title": "花笺",
-                "artist": "刘珂矣",
-                "album": '肩上蝶',
-                "cover": "https://visualhunt.com/photos/7/night-night-sky-nightsky.jpg?s=s",
-                "mp3": "http://oq5lv0dy4.bkt.clouddn.com/%E5%88%98%E7%8F%82%E7%9F%A3%20-%20%E8%8A%B1%E7%AC%BA.mp3",
-                "ogg": "https://visualhunt.com/photos/7/sky-silhouette-star.jpg?s=s"
-            }, {
-                "title": "如是",
-                "artist": "刘珂矣",
-                "album": '肩上蝶',
-                "cover": "https://visualhunt.com/photos/7/night-night-sky-nightsky.jpg?s=s",
-                "mp3": "http://oq5lv0dy4.bkt.clouddn.com/%E5%88%98%E7%8F%82%E7%9F%A3%20-%20%E5%A6%82%E6%98%AF.mp3",
-                "ogg": "https://visualhunt.com/photos/7/sky-silhouette-star.jpg?s=s"
-            }, {
-                "title": "缥缃醉",
-                "artist": "刘珂矣",
-                "album": '肩上蝶',
-                "cover": "https://visualhunt.com/photos/7/night-night-sky-nightsky.jpg?s=s",
-                "mp3": "http://oq5lv0dy4.bkt.clouddn.com/%E5%88%98%E7%8F%82%E7%9F%A3%20-%20%E7%BC%A5%E7%BC%83%E9%86%89.mp3",
-                "ogg": "https://visualhunt.com/photos/7/sky-silhouette-star.jpg?s=s"
-            }, {
-                "title": "弄戏",
-                "artist": "刘珂矣",
-                "album": '肩上蝶',
-                "cover": "https://visualhunt.com/photos/7/night-night-sky-nightsky.jpg?s=s",
-                "mp3": "http://oq5lv0dy4.bkt.clouddn.com/%E5%88%98%E7%8F%82%E7%9F%A3%20-%20%E5%BC%84%E6%88%8F.mp3",
-                "ogg": "https://visualhunt.com/photos/7/sky-silhouette-star.jpg?s=s"
-            }];
+        playlist = [];
     // Load playlist
+    //
+    $.getJSON("js/db.json", function (data) {
+        playlist = data;
+        // JSON.parse(playlist);
+
+    console.log(playlist.length);
+
     for (var i = 0; i < playlist.length; i++) {
         var item = playlist[i];
         $('#playlist').append('<li>' + item.artist + ' - ' + item.title + '</li>');
@@ -276,5 +219,6 @@
             shuffle = localStorage.shuffle = 'true';
             $(this).addClass('enable');
         }
+    });
     });
 })(jQuery);
